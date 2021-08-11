@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         //Set adapter
         LocationsAdapter.setAdapter(adapter);
 
+        WeatherDataService weatherDataService = new WeatherDataService(MainActivity.this);
         //submit button click event registration
         findViewById(R.id.submitButton).setOnClickListener(new View.OnClickListener()
         {
@@ -62,7 +63,18 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Incorrect Option", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this,LocationCode.get(index) , Toast.LENGTH_SHORT).show();
-                    testing();
+                    //testing();
+                    weatherDataService.getForecastByid(LocationCode.get(index), new WeatherDataService.VolleyResponseListener() {
+                        @Override
+                        public void onError(String message) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Object response) {
+
+                        }
+                    });
                 }
             }
 
