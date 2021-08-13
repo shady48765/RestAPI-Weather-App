@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,13 +21,17 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    ListView listView ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        listView =findViewById(R.id.list_view);
         initUI();
     }
 
@@ -58,22 +63,29 @@ public class MainActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View  view) {
+                listView.setAdapter(null);
                 int index = ((Locationlist.indexOf(LocationsAdapter.getText().toString())));
                 if (index == -1) {
                     Toast.makeText(MainActivity.this, "Incorrect Option", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity.this,LocationCode.get(index) , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Collecting Data..." , Toast.LENGTH_LONG).show();
                     //testing();
-                    weatherDataService.getForecastByid(LocationCode.get(index), new WeatherDataService.VolleyResponseListener() {
+                    weatherDataService.getForecastByid(LocationCode.get(index), new WeatherDataService.ForecastByIDResponse() {
                         @Override
                         public void onError(String message) {
 
                         }
 
+
+
                         @Override
-                        public void onResponse(Object response) {
+                        public void onResponse(List<WeatherReportModel> weatherReportModels) {
+                            ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, weatherReportModels);
+                            listView.setAdapter(arrayAdapter);
 
                         }
+
+
                     });
                 }
             }
@@ -110,13 +122,12 @@ public class MainActivity extends AppCompatActivity {
         Location_code.add("2295402");
         Location_code.add("2295420");
         Location_code.add("2295424");
-        Location_code.add("20070458");
+        Location_code.add("28743736");
         Location_code.add("2295414");
         Location_code.add("2295386");
-        Location_code.add("2295411");
+        Location_code.add("12586539");
         Location_code.add("2295412");
         Location_code.add("2295405");
-        Location_code.add("2295410");
         return Location_code;
     }
 
@@ -133,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
         Locations.add("Mumbai");
         Locations.add("Pune");
         Locations.add("Surat");
-        Locations.add("Thane");
 
         return Locations;
     }

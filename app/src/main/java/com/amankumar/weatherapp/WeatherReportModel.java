@@ -7,7 +7,7 @@ public class WeatherReportModel {
     private String weather_state_abbr;
     private String wind_direction_compass;
     private String created;
-    private String application_date;
+    private String applicable_date;
     private float min_temp;
     private float max_temp;
     private float the_temp;
@@ -20,23 +20,17 @@ public class WeatherReportModel {
 
     @Override
     public String toString() {
-        return "WeatherReportModel{" +
-                "id=" + id +
-                ", weather_state_name='" + weather_state_name + '\'' +
-                ", weather_state_abbr='" + weather_state_abbr + '\'' +
-                ", wind_direction_compass='" + wind_direction_compass + '\'' +
-                ", created='" + created + '\'' +
-                ", application_date='" + application_date + '\'' +
-                ", min_temp=" + min_temp +
-                ", max_temp=" + max_temp +
-                ", the_temp=" + the_temp +
-                ", wind_speed=" + wind_speed +
-                ", wind_direction=" + wind_direction +
-                ", air_pressure=" + air_pressure +
-                ", humidity=" + humidity +
-                ", visibility=" + visibility +
-                ", predictability=" + predictability +
-                '}';
+        return
+                "Date: " + applicable_date + "\n"+
+                "Weather State: " + weather_state_name + "\n" +
+                "Minimum Temperature: " + min_temp + "\n" +
+                "Maximum Temperature: " + max_temp +"\n" +
+                "Wind Speed: " + wind_speed + "\n" +
+                "Humidity: " + humidity + "\n"
+                ;
+    }
+
+    public WeatherReportModel() {
     }
 
     public int getId() {
@@ -79,12 +73,12 @@ public class WeatherReportModel {
         this.created = created;
     }
 
-    public String getApplication_date() {
-        return application_date;
+    public String getApplicable_date() {
+        return applicable_date;
     }
 
     public void setApplication_date(String application_date) {
-        this.application_date = application_date;
+        this.applicable_date = application_date;
     }
 
     public float getMin_temp() {
@@ -165,7 +159,7 @@ public class WeatherReportModel {
         this.weather_state_abbr = weather_state_abbr;
         this.wind_direction_compass = wind_direction_compass;
         this.created = created;
-        this.application_date = application_date;
+        this.applicable_date = application_date;
         this.min_temp = min_temp;
         this.max_temp = max_temp;
         this.the_temp = the_temp;
